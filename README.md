@@ -45,6 +45,7 @@ Use `mruby:fullpath_of_the_script` as lookup table.
 ```ruby
 class Upcase
   def lookup(key)
+    Log.info "input: #{key}" if Log.verbose?
     return key.upcase
   end
 end
@@ -55,6 +56,15 @@ Upcase.new
 % postmap -q abc mruby:/path/to/upcase.rb
 ABC
 ```
+
+### Logging
+
+* `Log.verbose` returns verbose level (Fixnum).
+* `Log.verbose?` returns true (if verbose > 0) or false (if verbose == 0).
+* `Log.info(msg)` log info level message.
+* `Log.warn(msg)` log warn level message.
+* `Log.error(msg)` log error level message.
+* `Log.fatal(msg)` log fatal level message and abort.
 
 ## License
 
