@@ -1,8 +1,8 @@
 diff --git a/build_config.rb b/build_config.rb
-index 3408f19..a7750d6 100644
+index 1429837..35df7d6 100644
 --- a/build_config.rb
 +++ b/build_config.rb
-@@ -33,6 +33,10 @@ MRuby::Build.new do |conf|
+@@ -34,11 +34,20 @@ MRuby::Build.new do |conf|
    #   cc.compile_options = "%{flags} -MMD -o %{outfile} -c %{infile}"
    # end
  
@@ -13,8 +13,6 @@ index 3408f19..a7750d6 100644
    # mrbc settings
    # conf.mrbc do |mrbc|
    #   mrbc.compile_options = "-g -B%{funcname} -o-" # The -g option is required for line numbers
-@@ -57,6 +61,11 @@ MRuby::Build.new do |conf|
-   #   archiver.archive_options = 'rs %{outfile} %{objs}'
    # end
  
 +  conf.archiver do |archiver|
@@ -22,14 +20,14 @@ index 3408f19..a7750d6 100644
 +    archiver.archive_options = '-shared -o %{outfile} %{objs}'
 +  end
 +
-   # Parser generator settings
-   # conf.yacc do |yacc|
-   #   yacc.command = ENV['YACC'] || 'bison'
-diff --git a/tasks/mruby_build.rake b/tasks/mruby_build.rake
-index 8438b6c..59fde43 100644
---- a/tasks/mruby_build.rake
-+++ b/tasks/mruby_build.rake
-@@ -60,7 +60,7 @@ module MRuby
+   # Linker settings
+   # conf.linker do |linker|
+   #   linker.command = ENV['LD'] || 'gcc'
+diff --git a/lib/mruby/build.rb b/lib/mruby/build.rb
+index 57bd9c5..97a55d3 100644
+--- a/lib/mruby/build.rb
++++ b/lib/mruby/build.rb
+@@ -61,7 +61,7 @@ module MRuby
          if ENV['OS'] == 'Windows_NT'
            @exts = Exts.new('.o', '.exe', '.a')
          else

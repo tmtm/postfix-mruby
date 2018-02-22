@@ -13,6 +13,7 @@ To build `libmruby.so`:
 ```
 % git clone https://github.com/mruby/mruby.git
 % cd mruby
+% git checkout 097bfdcac573861567716e4247265becec6b249a .
 % patch -p1 < mruby.diff
 % make
 % mkdir -p $MRUBYDIR
@@ -30,6 +31,8 @@ mruby.diff is [here](https://github.com/tmtm/postfix-mruby/blob/master/mruby.dif
 % LD_RUN_PATH=$MRUBYDIR gcc -shared -o postfix-mruby.so postfix-mruby.o -L$MRUBYDIR -lmruby -lm
 % sudo cp postfix-mruby.so $(postconf -h shlib_directory)
 ```
+
+and, add `mruby postfix-mruby.so dict_mruby_open` configuration into `/path/to/etc/dynamicmaps.cf`
 
 ## Usage
 
